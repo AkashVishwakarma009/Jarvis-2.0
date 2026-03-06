@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ assistant_name }} — AI Assistant</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ═══ Animated background particles ═══ -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- ═══ Main container ═══ -->
+    <div class="app-container">
+
+        <!-- ─── Header ─── -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo-icon">◆</div>
+                <h1 class="logo-text">{{ assistant_name | upper }}</h1>
+                <span class="version-badge">v2.0</span>
+            </div>
+            <div class="header-centre">
+                <span id="clock" class="clock"></span>
+            </div>
+            <div class="header-right">
+                <div class="status-indicator">
+                    <span class="status-dot" id="status-dot"></span>
+                    <span class="status-text" id="status-text">Ready</span>
+                </div>
+                <span class="command-count" id="command-count">Commands: 0</span>
+            </div>
+        </header>
+
+        <!-- ─── Main content ─── -->
+        <main class="main-content">
+
+            <!-- Left panel — Avatar / Orb -->
+            <section class="avatar-panel">
+                <div class="orb-wrapper">
+                    <div class="orb-glow" id="orb-glow"></div>
+                    <div class="orb" id="orb">
+                        <div class="orb-ring ring-1"></div>
+                        <div class="orb-ring ring-2"></div>
+                        <div class="orb-ring ring-3"></div>
+                        <div class="orb-core" id="orb-core"></div>
+                        <!-- Sound wave bars (visible when speaking) -->
+                        <div class="sound-waves" id="sound-waves">
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="avatar-name">{{ assistant_name | upper }}</h2>
+                <p class="avatar-subtitle" id="avatar-subtitle">AI Voice Assistant</p>
+
+                <!-- Quick command pills -->
+                <div class="quick-commands">
+                    <h3 class="quick-title">Quick Commands</h3>
+                    <div class="pills">
+                        <button class="pill" data-cmd="what time is it">🕐 Time</button>
+                        <button class="pill" data-cmd="what's the date">📅 Date</button>
+                        <button class="pill" data-cmd="open chrome">🌐 Chrome</button>
+                        <button class="pill" data-cmd="take a screenshot">📸 Screenshot</button>
+                        <button class="pill" data-cmd="open notepad">📝 Notepad</button>
+                        <button class="pill" data-cmd="volume up">🔊 Vol Up</button>
+                        <button class="pill" data-cmd="volume down">🔉 Vol Down</button>
+                        <button class="pill" data-cmd="open calculator">🧮 Calculator</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right panel — Chat log -->
+            <section class="chat-panel">
+                <div class="chat-header">
+                    <span class="chat-header-icon">💬</span>
+                    <span>Conversation Log</span>
+                </div>
+                <div class="chat-log" id="chat-log">
+                    <!-- Messages will be inserted here -->
+                </div>
+            </section>
+        </main>
+
+        <!-- ─── Input bar ─── -->
+        <footer class="input-bar">
+            <button class="mic-btn" id="mic-btn" title="Voice input">
+                <svg id="mic-icon" viewBox="0 0 24 24" width="22" height="22">
+                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                </svg>
+                <div class="mic-pulse" id="mic-pulse"></div>
+            </button>
+            <div class="input-wrapper">
+                <input
+                    type="text"
+                    id="command-input"
+                    class="command-input"
+                    placeholder="Type a command…"
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+            </div>
+            <button class="send-btn" id="send-btn">
+                Send <span class="send-arrow">➤</span>
+            </button>
+        </footer>
+    </div>
+
+    <!-- ═══ Scripts ═══ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.min.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
