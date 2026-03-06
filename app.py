@@ -201,4 +201,7 @@ if __name__ == "__main__":
     _reminder_thread = _threading.Thread(target=_reminder_loop, daemon=True)
     _reminder_thread.start()
 
-    socketio.run(app, host="0.0.0.0", port=5000, debug=True)
+    # Use waitress (production server) — no more "development server" warning
+    from waitress import serve
+    print("  ◆ Server running with Waitress (production mode)\n")
+    serve(app, host="0.0.0.0", port=5000)
